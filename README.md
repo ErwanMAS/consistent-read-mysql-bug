@@ -1,5 +1,10 @@
 # perco-mysql-bug
 
+you NEED to use `git lfs clone https://github.com/ErwanMAS/perco-mysql-bug.git`
+
+git lfs is for large objects ( in this repo , mysqldump/ )
+
+
 populate 2 tables with the 2 dumps
 
 ```
