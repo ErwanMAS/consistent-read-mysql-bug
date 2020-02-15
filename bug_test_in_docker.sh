@@ -5,9 +5,9 @@ then
         exit 1
 fi
 echo
-for V in mysql/mysql-server:8.0.19-1.1.15=mysql_8_0_19  mysql/mysql-server:5.7.29-1.1.15=mysql_5_7_29 mysql/mysql-server:5.6.47-1.1.15=mysql_5_6_47 mysql/mysql-server:5.5.62-1.1.10=mysql_5_5_62 \
+for V in mysql/mysql-server:8.0.19-1.1.15=mysql_8_0_19  mysql/mysql-server:8.0.4-1.1.3=mysql_8_0_4  mysql/mysql-server:5.7.29-1.1.15=mysql_5_7_29 mysql/mysql-server:5.6.47-1.1.15=mysql_5_6_47 mysql/mysql-server:5.5.62-1.1.10=mysql_5_5_62 \
        	 mariadb:10.4.12=maria_10_4_12 mariadb:10.3.22=maria_10_3_22 mariadb:10.2.31=maria_10_2_31 mariadb:10.1.44=maria_10_1_44 mariadb:10.1.22=maria_10_1_22 mariadb:10.1.11=maria_10_1_11 mariadb:5.5.64=maria_5_5_64 \
-         percona:ps-5.7.29=perco_5_7_29 percona:ps-5.6.47=perco_5_6_47 percona:ps-8.0.18-9=perco_8_0_18 percona:5.5.61=perco_5_5_61
+         percona:ps-8.0.18-9=perco_8_0_18 percona/percona-server:8.0.13=perco_8_0_13 percona:ps-5.7.29=perco_5_7_29 percona:ps-5.6.47=perco_5_6_47 percona:5.5.61=perco_5_5_61
 do
         IMG=$( echo "$V"| cut -d= -f1)
         NAM=$( echo "$V"| cut -d= -f2)
