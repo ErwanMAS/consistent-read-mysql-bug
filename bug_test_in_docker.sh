@@ -42,8 +42,8 @@ do
                 do
                   cat $F | docker exec -i ${NAM} sh -c "dd of=/tmp/$F"
                 done
-                docker exec -i $NAM  sh -c '/usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source /tmp/bug_session_a.sql"' > /tmp/output_${NAM}_session_a.log 2>&1 &
-                docker exec -i $NAM  sh -c '/usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source /tmp/bug_session_b.sql"' > /tmp/output_${NAM}_session_b.log 2>&1 &
+                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_a.sql"' > /tmp/output_${NAM}_session_a.log 2>&1 &
+                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_b.sql"' > /tmp/output_${NAM}_session_b.log 2>&1 &
                 wait
                 docker stop ${NAM}
                 docker rm --volumes ${NAM}
