@@ -1,5 +1,19 @@
-# perco-mysql-bug
+#  consistent-read-mysql-bug
 
+This is a dataset to demonstrate a very serious bug with `START TRANSACTION WITH CONSISTENT SNAPSHOT ;`
+
+With this bug data can disappear . 
+
+this regression appear between version version 5.6.35 and version 5.6.36 and 5.6.47 has still the bug 
+
+this regression appear between version version 5.7.17 and version 5.7.18 and 5.7.29 has still the bug
+
+ps: 
+ 
+https://jira.percona.com/browse/PS-6855
+
+
+# 
 BEWARE you must	use **git lfs**	instead	of **git**
 
 you NEED to use `git lfs clone https://github.com/ErwanMAS/perco-mysql-bug.git`
