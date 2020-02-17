@@ -16,7 +16,7 @@ https://jira.percona.com/browse/PS-6855
 # 
 BEWARE you must	use **git lfs**	instead	of **git**
 
-you NEED to use `git lfs clone https://github.com/ErwanMAS/perco-mysql-bug.git`
+you NEED to use `git lfs clone https://github.com/ErwanMAS/consistent-read-mysql-bug`
 
 git lfs is for large objects ( in this repo , mysqldump/ )
 
