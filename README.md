@@ -7,7 +7,7 @@ you NEED to use `git lfs clone https://github.com/ErwanMAS/perco-mysql-bug.git`
 git lfs is for large objects ( in this repo , mysqldump/ )
 
 
-populate 2 tables with the 2 dumps
+## populate 2 tables with 2 mysql dumps
 
 ```
 bzcat dump_bug_consistent_read.bz2       | mysql test
