@@ -13,14 +13,6 @@ ps:
 https://jira.percona.com/browse/PS-6855
 
 
-# 
-BEWARE you must	use **git lfs**	instead	of **git**
-
-you NEED to use `git lfs clone https://github.com/ErwanMAS/consistent-read-mysql-bug`
-
-git lfs is for large objects ( in this repo , mysqldump/ )
-
-
 ## populate 2 tables with 2 mysql dumps
 
 ```
@@ -28,7 +20,7 @@ bzcat dump_bug_consistent_read.bz2       | mysql test
 bzcat dump_bug_consistent_read_feed.bz2  | mysql test
 ```
 
-## full process with the 2 helper scripts
+## full automated tests  with the 2 helper scripts
 
 
 open a session A and source `bug_session_a.sql`
