@@ -12,6 +12,8 @@ ps:
  
 https://jira.percona.com/browse/PS-6855
 
+https://bugs.mysql.com/bug.php?id=98642
+
 
 ## populate 2 tables with 2 mysql dumps
 
