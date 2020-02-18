@@ -11,7 +11,7 @@ SOME_MARIA="mariadb:10.4.12=maria_10_4_12 mariadb:10.3.22=maria_10_3_22 mariadb:
 SOME_PERCO="percona:ps-8.0.18-9=perco_8_0_18 percona/percona-server:8.0.13=perco_8_0_13 percona:ps-5.7.29=perco_5_7_29 percona:ps-5.6.47=perco_5_6_47 percona:5.6.36=perco_5_6_36 percona:5.6.35=perco_5_6_35 percona:5.5.61=perco_5_5_61"
 #
 BUG_KO="mysql/mysql-server:5.6.35=mysql_5_6_35 mysql/mysql-server:5.7.17=mysql_5_7_17 percona:5.6.35=perco_5_6_35 percona:5.7.17=perco_5_7_17"
-BUG_OK="mysql/mysql-server:5.6.36=mysql_5_6_36 mysql/mysql-server:5.7.18=mysql_5_7_18 percona:5.6.36=perco_5_6_36 percona:5.7.18=perco_5_7_18 mysql/mysql-server:5.7.29-1.1.15=mysql_5_7_29 percona:ps-5.7.29=perco_5_7_29"
+BUG_OK="mysql/mysql-server:5.6.36=mysql_5_6_36 mysql/mysql-server:5.7.18=mysql_5_7_18 percona:5.6.36=perco_5_6_36 percona:5.7.18=perco_5_7_18 mysql/mysql-server:5.7.29-1.1.15=mysql_5_7_29 percona:ps-5.7.29=perco_5_7_29 mysql/mysql-server:5.6.47-1.1.15=mysql_5_6_47 percona:ps-5.6.47=perco_5_6_47"
 #
 PARA_CNT=4
 C=0
