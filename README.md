@@ -27,8 +27,8 @@ i will reference the file bug_create_buggy.sql as INSERT_DATA_FROM_FEED ( https:
 
 i created some videos videos some the full process, you can see at the end the issue 
 
-[video that exhibit the bug with a reader transaction ](videos/bug_98642_method1.mp4)
-[video that exhibit the bug with a writer transaction ](videos/bug_98642_method2.mp4)
+ 1. [video that exhibit the bug with a reader transaction ](videos/bug_98642_method1.mp4) videos/bug_98642_method1.mp4 
+ 2. [video that exhibit the bug with a writer transaction ](videos/bug_98642_method2.mp4) videos/bug_98642_method2.mp4
 
 
 ## populate 2 tables with 2 mysql dumps
