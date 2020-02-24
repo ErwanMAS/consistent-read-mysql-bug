@@ -1,19 +1,32 @@
-#  consistent-read-mysql-bug
+# consistent-read-mysql-bug
 
-This is a dataset to demonstrate a very serious bug with `START TRANSACTION WITH CONSISTENT SNAPSHOT ;`
-
-With this bug data can disappear . 
+This is a dataset to demonstrate a very serious bug that reveal , lack of ISOLATION between session .
 
 this regression appear between version version 5.6.35 and version 5.6.36 and 5.6.47 has still the bug 
 
 this regression appear between version version 5.7.17 and version 5.7.18 and 5.7.29 has still the bug
 
-ps: 
- 
-https://jira.percona.com/browse/PS-6855
 
-https://bugs.mysql.com/bug.php?id=98642
+## Requirements 
 
+2 tables must be populated with the current mysqldumps ( from https://github.com/ErwanMAS/consistent-read-mysql-bug/tree/master/mysqldump )
+
+i will reference the first query of bug_buggy_chunk.sql as QUERY_COUNT ( https://github.com/ErwanMAS/consistent-read-mysql-bug/blob/master/bug_buggy_chunks.sql )
+
+i will reference the file bug_create_buggy.sql as INSERT_DATA_FROM_FEED ( https://github.com/ErwanMAS/consistent-read-mysql-bug/blob/master/bug_create_buggy.sql )
+
+
+## Bug reports
+
+  https://jira.percona.com/browse/PS-6855
+
+  https://bugs.mysql.com/bug.php?id=98642
+
+
+## Videos
+
+   videos/bug_98642_method1.mp4
+   videos/bug_98642_method2.mp4
 
 ## populate 2 tables with 2 mysql dumps
 
@@ -31,37 +44,69 @@ open a session B and source `bug_session_b.sql`
 
 both scripts will use /tmp/ for	creating files to sync .
 
+## step by step process
 
-## manual process step by step 
+### method 1
 
-1. open a session A
+the writer will insert data with auto-commit
+a reader will open a session and start a transaction
 
-`source bug_buggy_chunks.sql ; `
+step by step :
 
-must return always a rounded number ( 2000 , 5000 , 10000 , 15000 , 20000 ) 
+1. start a session A
+2. execute QUERY_COUNT must return 2000
+3. start a session B
+4. start a transaction with BEGIN
+5. check your isolation level , by SELECT @@SESSION.tx_isolation ; must be REPEATABLE-READ
+5. execute QUERY_COUNT must return 2000
+6. switch to session A
+7. execute INSERT_DATA_FROM_FEED ( source bug_create_buggy.sql )
+8. wait for completion
+9. switch to session B
+10. execute QUERY_COUNT must return 2000 , but because of the bug it return 1706 why ?
 
-2. open a session B
+### method 2
 
-start a consistent snapshot with
+the writer will open a session , and start a transaction
+insert data and rollback
+a reader will open a regular session
 
-`START TRANSACTION WITH CONSISTENT SNAPSHOT ;`
+step by step :
 
-`source bug_buggy_chunks.sql ; `
+1. start a session A
+2. start a TRANSACTION with BEGIN
+3. execute QUERY_COUNT must return 2000
+4. check your isolation level , by SELECT @@SESSION.tx_isolation ; must be REPEATABLE-READ
+5. start a session B
+5. execute QUERY_COUNT must return 2000
+6. switch to session A
+7. execute INSERT_DATA_FROM_FEED ( source bug_create_buggy.sql )
+8. wait for completion ( don't commit )
+9. switch to session B
+10. execute QUERY_COUNT must return 2000 , but because of the bug it return 1706 why ?
+11. switch to session A
+12. rollback
+13. wait for completion of rollback
+14. switch to session B
+15. execute QUERY_COUNT return 2000
 
-must return always a rounded number ( 2000 , 5000 , 10000 , 15000 , 20000 ) 
 
+## Why this a bug
 
-3. now back on session A
+### method 1 
 
-source file `bug_create_buggy.sql`
+step 10 is a bug because my select by commit made after my first SELECT
 
-this file will pouplate `bug_consistent_read` with some row of `bug_consistent_read_feed`
+justification in https://dev.mysql.com/doc/refman/5.7/en/innodb-consistent-read.html
 
-when is done
+> Suppose that you are running in the default REPEATABLE READ isolation level. When you issue a consistent read (that is, an ordinary SELECT statement),
+> InnoDB gives your transaction a timepoint according to which your query sees the database.
+> If another transaction deletes a row and commits after your timepoint was assigned, you do not see the row as having been deleted. Inserts and updates are treated similarly.
 
-4. back to session B
+### method 2
 
-run again the script and you will see many values not rounded  
+step 10 is a bug because concurent insert was not committed , why my select return less data
 
-`source bug_buggy_chunks.sql ; `
+and at step 15 after the rollback , the query return now 2000
+
 
