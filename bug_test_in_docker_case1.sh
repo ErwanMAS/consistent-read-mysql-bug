@@ -5,7 +5,7 @@ SOME_OLD_MARIA="mariadb:5.5.64=maria_5_5_64"
 SOME_OLD_PERCO="percona:5.5.61=perco_5_5_61"
 #
 SOME_MYSQL="mysql/mysql-server:8.0.19-1.1.15=mysql_8_0_19  mysql/mysql-server:8.0.4-1.1.3=mysql_8_0_4 mysql/mysql-server:8.0.1-1.0.0=mysql_8_0_1 mysql/mysql-server:5.7.29-1.1.15=mysql_5_7_29 mysql/mysql-server:5.7.18=mysql_5_7_18 mysql/mysql-server:5.7.17=mysql_5_7_17
-            mysql/mysql-server:5.6.47-1.1.15=mysql_5_6_47  mysql/mysql-server:5.6.46-1.1.13=mysql_5_6_46 mysql/mysql-server:5.6.45-1.1.12=mysql_5_6_45 mysql/mysql-server:5.6.44-1.1.11=mysql_5_6_44 mysql/mysql-server:5.6.43-1.1.10=mysql_5_6_43 mysql/mysql-server:5.6.42-1.1.8=mysql_5_6_42  mysql/mysql-server:5.6.41-1.1.7=mysql_5_6_41  mysql/mysql-server:5.6.40-1.1.5==mysql_5_6_40
+            mysql/mysql-server:5.6.47-1.1.15=mysql_5_6_47  mysql/mysql-server:5.6.46-1.1.13=mysql_5_6_46 mysql/mysql-server:5.6.45-1.1.12=mysql_5_6_45 mysql/mysql-server:5.6.44-1.1.11=mysql_5_6_44 mysql/mysql-server:5.6.43-1.1.10=mysql_5_6_43 mysql/mysql-server:5.6.42-1.1.8=mysql_5_6_42  mysql/mysql-server:5.6.41-1.1.7=mysql_5_6_41  mysql/mysql-server:5.6.40-1.1.5=mysql_5_6_40
 	    mysql/mysql-server:5.6.39-1.1.3=mysql_5_6_39  mysql/mysql-server:5.6.38-1.1.2=mysql_5_6_38  mysql/mysql-server:5.6.37-1.1.1=mysql_5_6_37
             mysql/mysql-server:5.6.36=mysql_5_6_36  mysql/mysql-server:5.6.35=mysql_5_6_35 mysql/mysql-server:5.6.23=mysql_5_6_23"
 SOME_MARIA="mariadb:10.4.12=maria_10_4_12 mariadb:10.3.22=maria_10_3_22 mariadb:10.2.31=maria_10_2_31 mariadb:10.1.44=maria_10_1_44 mariadb:10.1.22=maria_10_1_22 mariadb:10.1.11=maria_10_1_11"
@@ -46,8 +46,8 @@ do
                 do
                   cat $F | docker exec -i ${NAM} sh -c "dd of=/tmp/$F"
                 done
-                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_a.sql"' > /tmp/output_${NAM}_session_${VERSION}_a.log 2>&1 &
-                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_b.sql"' > /tmp/output_${NAM}_session_${VERSION}_b.log 2>&1 &
+                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_'${VERSION}'_a.sql"' > /tmp/output_${NAM}_session_${VERSION}_a.log 2>&1 &
+                docker exec -i $NAM  sh -c 'cd /tmp; /usr/bin/mysql  -u root -ptest1234  -h localhost test -e "source bug_session_'${VERSION}'_b.sql"' > /tmp/output_${NAM}_session_${VERSION}_b.log 2>&1 &
                 wait
                 docker stop ${NAM}
                 docker rm --volumes ${NAM}
