@@ -10,6 +10,8 @@ Case 2
 
 A range query can have his result truncated , by inserts that are not commited
 
+## MYSQL version 
+
 this regression appear between version version 5.6.35 and version 5.6.36 and 5.6.47 has still the bug
 
 this regression appear between version version 5.7.17 and version 5.7.18 and 5.7.29 has still the bug
@@ -18,10 +20,6 @@ this regression appear between version version 5.7.17 and version 5.7.18 and 5.7
 ## Requirements
 
 2 tables must be populated with the current mysqldumps ( from https://github.com/ErwanMAS/consistent-read-mysql-bug/tree/master/mysqldump )
-
-i will reference the first query of bug_buggy_chunk.sql as QUERY_COUNT ( https://github.com/ErwanMAS/consistent-read-mysql-bug/blob/master/bug_buggy_chunks.sql )
-
-i will reference the file bug_create_buggy.sql as INSERT_DATA_FROM_FEED ( https://github.com/ErwanMAS/consistent-read-mysql-bug/blob/master/bug_create_buggy.sql )
 
 
 ## Bug reports
